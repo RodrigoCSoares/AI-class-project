@@ -16,6 +16,11 @@ public class TreeSearchBreadthFirst extends TreeSearchStrategy {
     }
 
     @Override
+    public boolean hasTreeNode(Object nodeValue) {
+        return false;
+    }
+
+    @Override
     public void setRootNode(TreeNode rootNode) {
 
     }

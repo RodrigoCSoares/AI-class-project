@@ -10,6 +10,8 @@ public abstract class TreeSearchStrategy {
 
     public abstract TreeNode getTreeNode(Object nodeValue);
 
+    public abstract boolean hasTreeNode(Object nodeValue);
+
     public abstract void setRootNode(TreeNode rootNode);
 
     public abstract TreeNode getRootNode();

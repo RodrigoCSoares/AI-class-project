@@ -13,4 +13,8 @@ public class TreeSearcher {
     public TreeNode getTreeNode(Object nodeValue) {
         return searchStrategy.getTreeNode(nodeValue);
     }
+
+    public boolean hasTreeNode(Object nodeValue) {
+        return searchStrategy.hasTreeNode(nodeValue);
+    }
 }

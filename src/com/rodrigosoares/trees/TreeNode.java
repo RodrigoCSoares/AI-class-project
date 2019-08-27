@@ -3,20 +3,20 @@ package com.rodrigosoares.trees;
 import java.util.ArrayList;
 
 public class TreeNode {
-    private String nodeName;
+    private Object nodeValue;
     private ArrayList<TreeNode> nodeConnections;
 
-    public TreeNode(String nodeName, ArrayList<TreeNode> nodeConnections) {
-        this.nodeName = nodeName;
+    public TreeNode(Object nodeName, ArrayList<TreeNode> nodeConnections) {
+        this.nodeValue = nodeName;
         this.nodeConnections = nodeConnections != null ? nodeConnections : new ArrayList<>();
     }
 
-    public String getNodeName() {
-        return nodeName;
+    public Object getNodeValue() {
+        return nodeValue;
     }
 
-    public void setNodeName(String nodeName) {
-        this.nodeName = nodeName;
+    public void getNodeValue(Object nodeValue) {
+        this.nodeValue = nodeValue;
     }
 
     public ArrayList<TreeNode> getNodeConnections() {
@@ -34,7 +34,7 @@ public class TreeNode {
     @Override
     public String toString() {
         return "TreeNode{" +
-                "nodeName='" + nodeName + '\'' +
+                "nodeName='" + nodeValue.toString() + '\'' +
                 ", nodeConnections=" + nodeConnections +
                 '}';
     }
