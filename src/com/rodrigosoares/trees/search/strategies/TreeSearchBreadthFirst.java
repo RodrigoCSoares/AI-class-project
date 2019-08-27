@@ -4,9 +4,17 @@ import com.rodrigosoares.trees.TreeNode;
 
 import java.util.ArrayList;
 
+/**
+ * This class is the Breadth-first search strategy of a tree.
+ * It start searching in the nearest connections between the nodes, level by level.
+ */
 public class TreeSearchBreadthFirst extends TreeSearchStrategy {
     private TreeNode rootNode;
 
+    /**
+     * Constructor
+     * @param rootNode Root node of the tree
+     */
     public TreeSearchBreadthFirst(TreeNode rootNode) {
         super(rootNode);
         this.rootNode = rootNode;

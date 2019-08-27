@@ -4,9 +4,17 @@ import com.rodrigosoares.trees.TreeNode;
 
 import java.util.Stack;
 
+/**
+ * This class is the Depth-first search strategy of a tree.
+ * It searches the value going deeper and deeper into the nodes before changing to a same-level node.
+ */
 public class TreeSearchDepthFirst extends TreeSearchStrategy {
     private TreeNode rootNode;
 
+    /**
+     * Constructor
+     * @param rootNode Root node of the tree
+     */
     public TreeSearchDepthFirst(TreeNode rootNode) {
         super(rootNode);
         this.rootNode = rootNode;
