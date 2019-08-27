@@ -10,8 +10,15 @@ import com.rodrigosoares.trees.search.strategies.TreeSearchDepthFirst;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Main class
+ */
 public class Main {
 
+    /**
+     * Main method
+     * @param args Software arguments, unused for now
+     */
     public static void main(String[] args) {
         Scanner reader = new Scanner(System.in);
 
