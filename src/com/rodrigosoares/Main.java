@@ -4,6 +4,7 @@ import com.rodrigosoares.readers.LineFileReader;
 import com.rodrigosoares.trees.TreeBuilder;
 import com.rodrigosoares.trees.TreeNode;
 import com.rodrigosoares.trees.search.TreeSearcher;
+import com.rodrigosoares.trees.search.strategies.TreeSearchBreadthFirst;
 import com.rodrigosoares.trees.search.strategies.TreeSearchDepthFirst;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class Main {
         System.out.println("Qual o valor que deseja buscar?");
         String nodeValue = reader.nextLine();
         TreeBuilder treeBuilder = new TreeBuilder(lines, ", ");
-        TreeSearcher treeSearcher = new TreeSearcher(new TreeSearchDepthFirst(treeBuilder.getRootNode()));
+        TreeSearcher treeSearcher = new TreeSearcher(new TreeSearchBreadthFirst(treeBuilder.getRootNode()));
         System.out.println(treeSearcher.hasTreeNode(nodeValue));
     }
 }

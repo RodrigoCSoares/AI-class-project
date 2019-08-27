@@ -6,7 +6,6 @@ import java.util.Stack;
 
 public class TreeSearchDepthFirst extends TreeSearchStrategy {
     private TreeNode rootNode;
-    private Stack<TreeNode> searchStack = new Stack<>();
 
     public TreeSearchDepthFirst(TreeNode rootNode) {
         super(rootNode);
@@ -15,6 +14,7 @@ public class TreeSearchDepthFirst extends TreeSearchStrategy {
 
     @Override
     public TreeNode getTreeNode(Object nodeValue) {
+        Stack<TreeNode> searchStack = new Stack<>();
         if (rootNode.getNodeValue().equals(nodeValue)) {
             return rootNode;
         }
