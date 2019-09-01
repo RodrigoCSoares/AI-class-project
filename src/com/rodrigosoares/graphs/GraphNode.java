@@ -1,22 +1,22 @@
 package com.rodrigosoares.graphs;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * This class represents a node of the a graph
  */
 public class GraphNode {
     private Object nodeValue;
-    private ArrayList<GraphNode> nodeConnections;
+    private HashSet<GraphNode> nodeConnections;
 
     /**
      * Constructor
      * @param nodeValue Node's value
      * @param nodeConnections Connections of the node
      */
-    public GraphNode(Object nodeValue, ArrayList<GraphNode> nodeConnections) {
+    public GraphNode(Object nodeValue, HashSet<GraphNode> nodeConnections) {
         this.nodeValue = nodeValue;
-        this.nodeConnections = nodeConnections != null ? nodeConnections : new ArrayList<>();
+        this.nodeConnections = nodeConnections != null ? nodeConnections : new HashSet<>();
     }
 
     /**
@@ -39,7 +39,7 @@ public class GraphNode {
      * Get node's connection
      * @return Node's connection
      */
-    public ArrayList<GraphNode> getNodeConnections() {
+    public HashSet<GraphNode> getNodeConnections() {
         return nodeConnections;
     }
 
@@ -47,7 +47,7 @@ public class GraphNode {
      * Set node's connection
      * @param nodeConnections Node's connection
      */
-    public void setNodeConnections(ArrayList<GraphNode> nodeConnections) {
+    public void setNodeConnections(HashSet<GraphNode> nodeConnections) {
         this.nodeConnections = nodeConnections;
     }
 

@@ -65,7 +65,9 @@ public class GraphBuilder {
             GraphNode node = nodesHashMap.get(nodeValues[0]);
 
             for(int i = 1; i < nodeValues.length; i++) {
-                node.addNodeConnection(nodesHashMap.get(nodeValues[i]));
+                GraphNode connectedNode = nodesHashMap.get(nodeValues[i]);
+                connectedNode.addNodeConnection(node);
+                node.addNodeConnection(connectedNode);
             }
         }
     }
