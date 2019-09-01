@@ -23,13 +23,13 @@ public class Main {
         //Read nodes file
         System.out.println("Qual o nome do arquivo?");
         String fileName = reader.nextLine();
-        ArrayList<String> lines = LineFileReader.readFileLines("src/com/rodrigosoares/" + fileName);
+            ArrayList<String> lines = LineFileReader.readFileLines("src/com/rodrigosoares/" + fileName, ';');
 
         //Search for a node
         System.out.println("Qual o valor que deseja buscar?");
         String nodeValue = reader.nextLine();
         GraphBuilder graphBuilder = new GraphBuilder(lines, ", ");
         GraphSearcher graphSearcher = new GraphSearcher(new GraphSearchBreadthFirst(graphBuilder.getRootNode()));
-        System.out.println(graphSearcher.hasTreeNode(nodeValue));
+        System.out.println(graphSearcher.hasGraphNode(nodeValue));
     }
 }
