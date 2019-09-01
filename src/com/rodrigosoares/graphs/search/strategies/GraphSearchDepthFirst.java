@@ -1,35 +1,35 @@
-package com.rodrigosoares.trees.search.strategies;
+package com.rodrigosoares.graphs.search.strategies;
 
-import com.rodrigosoares.trees.TreeNode;
+import com.rodrigosoares.graphs.GraphNode;
 
 import java.util.Stack;
 
 /**
- * This class is the Depth-first search strategy of a tree.
+ * This class is the Depth-first search strategy of a graph.
  * It searches the value going deeper and deeper into the nodes before changing to a same-level node.
  */
-public class TreeSearchDepthFirst extends TreeSearchStrategy {
-    private TreeNode rootNode;
+public class GraphSearchDepthFirst extends GraphSearchStrategy {
+    private GraphNode rootNode;
 
     /**
      * Constructor
-     * @param rootNode Root node of the tree
+     * @param rootNode Root node of the graph
      */
-    public TreeSearchDepthFirst(TreeNode rootNode) {
+    public GraphSearchDepthFirst(GraphNode rootNode) {
         super(rootNode);
         this.rootNode = rootNode;
     }
 
     @Override
-    public TreeNode getTreeNode(Object nodeValue) {
-        Stack<TreeNode> searchStack = new Stack<>();
+    public GraphNode getGraphNode(Object nodeValue) {
+        Stack<GraphNode> searchStack = new Stack<>();
         if (rootNode.getNodeValue().equals(nodeValue)) {
             return rootNode;
         }
 
         searchStack.addAll(rootNode.getNodeConnections());
         while (!searchStack.isEmpty()) {
-            TreeNode currentNode = searchStack.pop();
+            GraphNode currentNode = searchStack.pop();
             if(currentNode.getNodeValue().equals(nodeValue)) {
                 return currentNode;
             }
@@ -41,17 +41,17 @@ public class TreeSearchDepthFirst extends TreeSearchStrategy {
     }
 
     @Override
-    public boolean hasTreeNode(Object nodeValue) {
-        return getTreeNode(nodeValue) != null;
+    public boolean hasGraphNode(Object nodeValue) {
+        return getGraphNode(nodeValue) != null;
     }
 
     @Override
-    public void setRootNode(TreeNode rootNode) {
+    public void setRootNode(GraphNode rootNode) {
         this.rootNode = rootNode;
     }
 
     @Override
-    public TreeNode getRootNode() {
+    public GraphNode getRootNode() {
         return rootNode;
     }
 }

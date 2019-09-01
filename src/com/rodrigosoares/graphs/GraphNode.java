@@ -1,20 +1,20 @@
-package com.rodrigosoares.trees;
+package com.rodrigosoares.graphs;
 
 import java.util.ArrayList;
 
 /**
- * This class represents a node of the a tree
+ * This class represents a node of the a graph
  */
-public class TreeNode {
+public class GraphNode {
     private Object nodeValue;
-    private ArrayList<TreeNode> nodeConnections;
+    private ArrayList<GraphNode> nodeConnections;
 
     /**
      * Constructor
      * @param nodeValue Node's value
      * @param nodeConnections Connections of the node
      */
-    public TreeNode(Object nodeValue, ArrayList<TreeNode> nodeConnections) {
+    public GraphNode(Object nodeValue, ArrayList<GraphNode> nodeConnections) {
         this.nodeValue = nodeValue;
         this.nodeConnections = nodeConnections != null ? nodeConnections : new ArrayList<>();
     }
@@ -39,7 +39,7 @@ public class TreeNode {
      * Get node's connection
      * @return Node's connection
      */
-    public ArrayList<TreeNode> getNodeConnections() {
+    public ArrayList<GraphNode> getNodeConnections() {
         return nodeConnections;
     }
 
@@ -47,7 +47,7 @@ public class TreeNode {
      * Set node's connection
      * @param nodeConnections Node's connection
      */
-    public void setNodeConnections(ArrayList<TreeNode> nodeConnections) {
+    public void setNodeConnections(ArrayList<GraphNode> nodeConnections) {
         this.nodeConnections = nodeConnections;
     }
 
@@ -55,13 +55,13 @@ public class TreeNode {
      * Adds a single node connection
      * @param node Node's connection
      */
-    public void addNodeConnection(TreeNode node) {
+    public void addNodeConnection(GraphNode node) {
         this.nodeConnections.add(node);
     }
 
     @Override
     public String toString() {
-        return "TreeNode{" +
+        return "GraphNode{" +
                 "nodeName='" + nodeValue.toString() + '\'' +
                 ", nodeConnections=" + nodeConnections +
                 '}';

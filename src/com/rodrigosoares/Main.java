@@ -1,11 +1,9 @@
 package com.rodrigosoares;
 
 import com.rodrigosoares.readers.LineFileReader;
-import com.rodrigosoares.trees.TreeBuilder;
-import com.rodrigosoares.trees.TreeNode;
-import com.rodrigosoares.trees.search.TreeSearcher;
-import com.rodrigosoares.trees.search.strategies.TreeSearchBreadthFirst;
-import com.rodrigosoares.trees.search.strategies.TreeSearchDepthFirst;
+import com.rodrigosoares.graphs.GraphBuilder;
+import com.rodrigosoares.graphs.search.GraphSearcher;
+import com.rodrigosoares.graphs.search.strategies.GraphSearchBreadthFirst;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -30,8 +28,8 @@ public class Main {
         //Search for a node
         System.out.println("Qual o valor que deseja buscar?");
         String nodeValue = reader.nextLine();
-        TreeBuilder treeBuilder = new TreeBuilder(lines, ", ");
-        TreeSearcher treeSearcher = new TreeSearcher(new TreeSearchBreadthFirst(treeBuilder.getRootNode()));
-        System.out.println(treeSearcher.hasTreeNode(nodeValue));
+        GraphBuilder graphBuilder = new GraphBuilder(lines, ", ");
+        GraphSearcher graphSearcher = new GraphSearcher(new GraphSearchBreadthFirst(graphBuilder.getRootNode()));
+        System.out.println(graphSearcher.hasTreeNode(nodeValue));
     }
 }
