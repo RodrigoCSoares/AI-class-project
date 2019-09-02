@@ -2,6 +2,7 @@ package com.rodrigosoares.graphs.search.strategies;
 
 import com.rodrigosoares.graphs.GraphNode;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
@@ -11,24 +12,17 @@ public abstract class GraphSearchStrategy {
 
     /**
      * Constructor
-     * @param rootNode Root node of the graph
+     * @param nodesHashMap Graph nodes hash map
      */
-    GraphSearchStrategy(GraphNode rootNode) {
+    GraphSearchStrategy(HashMap<Object, GraphNode> nodesHashMap) {
     }
 
     /**
-     * Returns a graph node with the given node value
+     * Returns a graph node based on its value
      * @param nodeValue Node value to be searched
-     * @return The graph node with the given node value or null if there is no node
+     * @return The graph node if it exists or null if it does not exist
      */
     public abstract GraphNode getGraphNode(Object nodeValue);
-
-    /**
-     * Verifies if there is or there is not a node with the given node value
-     * @param nodeValue Node value to be searched
-     * @return true if there is a node or false if there is not
-     */
-    public abstract boolean hasGraphNode(Object nodeValue);
 
     /**
      * Search for a path between two nodes
@@ -37,17 +31,5 @@ public abstract class GraphSearchStrategy {
      * @return The path between those two nodes
      */
     public abstract LinkedList<GraphNode> pathBetween(Object startValue, Object endValue);
-
-    /**
-     * Sets the root node of the graph
-     * @param rootNode Root node of the graph
-     */
-    public abstract void setRootNode(GraphNode rootNode);
-
-    /**
-     * Returns the root node of the graph
-     * @return The root node of the graph
-     */
-    public abstract GraphNode getRootNode();
 
 }

@@ -29,21 +29,12 @@ public class GraphSearcher {
     }
 
     /**
-     * Verifies if there is or there is not a node with a given node value
-     * @param nodeValue Node value to be searched
-     * @return true if there is a node or false if there is not
-     */
-    public boolean hasGraphNode(Object nodeValue) {
-        return searchStrategy.hasGraphNode(nodeValue);
-    }
-
-    /**
      * Search for a path between two nodes
      * @param startValue The value of the node to be used as the start of the search
      * @param endValue The value of the end node to be used as the end of the search
      * @return The path between those two nodes
      */
-    public LinkedList pathBetween(Object startValue, Object endValue) {
+    public LinkedList<GraphNode> pathBetween(Object startValue, Object endValue) {
         return searchStrategy.pathBetween(startValue, endValue);
     }
 }

@@ -8,6 +8,8 @@ import java.util.HashSet;
 public class GraphNode {
     private Object nodeValue;
     private HashSet<GraphNode> nodeConnections;
+    private boolean isValid = true;
+    private boolean isOnTheCurrentPath = false;
 
     /**
      * Constructor
@@ -43,6 +45,16 @@ public class GraphNode {
         return nodeConnections;
     }
 
+    public HashSet<GraphNode> getValidNodeConnection() {
+        HashSet<GraphNode> validNodes = new HashSet<>();
+        for(GraphNode node : nodeConnections) {
+            if (node.isValid()) {
+                validNodes.add(node);
+            }
+        }
+        return validNodes;
+    }
+
     /**
      * Set node's connection
      * @param nodeConnections Node's connection
@@ -59,11 +71,44 @@ public class GraphNode {
         this.nodeConnections.add(node);
     }
 
+
     @Override
-    public String toString() {
-        return "GraphNode{" +
-                "nodeName='" + nodeValue.toString() + '\'' +
-                ", nodeConnections=" + nodeConnections +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GraphNode graphNode = (GraphNode) o;
+        return getNodeValue().equals(graphNode.getNodeValue());
+    }
+
+    /**
+     * Checks if a node of the graph was already visited or not
+     * @return true if the node was visited or false if it was not visited
+     */
+    public boolean isValid() {
+        return isValid;
+    }
+
+    /**
+     * Set if a node of the graph was already visited or not
+     * @param valid true if the node was visited or false if it was not visited
+     */
+    public void setValid(boolean valid) {
+        isValid = valid;
+    }
+
+    /**
+     * Checks if the current node is on the current path of the search
+     * @return true if it is on the current path or false if it is not
+     */
+    public boolean isOnTheCurrentPath() {
+        return isOnTheCurrentPath;
+    }
+
+    /**
+     * Set if the current node is on the current path of the search
+     * @param onTheCurrentPath true if it is on the current path or false if it is not
+     */
+    public void setOnTheCurrentPath(boolean onTheCurrentPath) {
+        isOnTheCurrentPath = onTheCurrentPath;
     }
 }

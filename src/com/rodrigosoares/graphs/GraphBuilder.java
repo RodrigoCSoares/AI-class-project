@@ -3,16 +3,13 @@ package com.rodrigosoares.graphs;
 import java.util.*;
 
 /**
- * This class build a graph
- * based on a string that represents a line of connection.
- * This line follows a pattern: First item is a node of the graph
- * and the following items are the connections
- * of that node.
+ * This class build a graph based on a string that represents a line of connection.
+ * This line follows a pattern: First item is a node of the graph and the following
+ * items are the connections of that node.
  * The line has a split pattern for the items, normally a "," but it can be any other character
  */
 public class GraphBuilder {
-    private Collection<GraphNode> graphNodes;
-    private GraphNode rootNode;
+    private HashMap<Object, GraphNode> nodesHashMap;
 
     /**
      * Constructor
@@ -21,9 +18,8 @@ public class GraphBuilder {
      * @param splitPattern The split pattern for the items in which line
      */
     public GraphBuilder(ArrayList<String> linesOfConnections, String splitPattern) {
-        HashMap<Object, GraphNode> nodesHashMap = initializeAllNodes(linesOfConnections, splitPattern);
-        setupNodesConnection(linesOfConnections, nodesHashMap, splitPattern);
-        this.graphNodes = nodesHashMap.values();
+        this.nodesHashMap = initializeAllNodes(linesOfConnections, splitPattern);
+        setupNodesConnection(linesOfConnections, this.nodesHashMap, splitPattern);
     }
 
     /**
@@ -58,8 +54,6 @@ public class GraphBuilder {
      * @param splitPattern The split pattern for the items in which line
      */
     private void setupNodesConnection(ArrayList<String> linesOfConnections, HashMap<Object, GraphNode> nodesHashMap, String splitPattern) {
-        this.rootNode = nodesHashMap.get(linesOfConnections.get(0).split(splitPattern)[0]);
-
         for(String line : linesOfConnections) {
             String[] nodeValues = line.split(splitPattern);
             GraphNode node = nodesHashMap.get(nodeValues[0]);
@@ -73,22 +67,13 @@ public class GraphBuilder {
     }
 
     /**
-     * Returns the graph
+     * Returns the graph nodes hash map
      * nodes
-     * @return The graph
+     * @return The graph nodes hash map
      * nodes
      */
-    public Collection<GraphNode> getGraphNodes() {
-        return graphNodes;
+    public HashMap<Object, GraphNode> getGraphNodesHashMap() {
+        return nodesHashMap;
     }
 
-    /**
-     * Returns the root of the graph
-     *
-     * @return The root of the graph
-     *
-     */
-    public GraphNode getRootNode() {
-        return rootNode;
-    }
 }

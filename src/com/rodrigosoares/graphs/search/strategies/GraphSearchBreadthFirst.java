@@ -2,55 +2,84 @@ package com.rodrigosoares.graphs.search.strategies;
 
 import com.rodrigosoares.graphs.GraphNode;
 
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * This class is the Breadth-first search strategy of a graph.
  * It start searching in the nearest connections between the nodes, level by level.
  */
 public class GraphSearchBreadthFirst extends GraphSearchStrategy {
-    private GraphNode rootNode;
+    private HashMap<Object, GraphNode> nodesHashMap;
 
     /**
      * Constructor
-     * @param rootNode Root node of the graph
+     * @param nodesHashMap Graph nodes hash map
      */
-    public GraphSearchBreadthFirst(GraphNode rootNode) {
-        super(rootNode);
-        this.rootNode = rootNode;
+    public GraphSearchBreadthFirst(HashMap<Object, GraphNode> nodesHashMap) {
+        super(nodesHashMap);
+        this.nodesHashMap = nodesHashMap;
     }
 
+//    @Override
+//    public GraphNode getGraphNode(Object nodeValue) {
+//        if (rootNode.getNodeValue().equals(nodeValue)) {
+//            return rootNode;
+//        }
+//
+//        ArrayList<GraphNode> searchList = new ArrayList<>(rootNode.getNodeConnections());
+//        while (!searchList.isEmpty()) {
+//            GraphNode currentNode = searchList.remove(0);
+//            if(currentNode.getNodeValue().equals(nodeValue)) {
+//                return currentNode;
+//            }
+//
+//            searchList.addAll(currentNode.getNodeConnections());
+//        }
+//
+//        return null;
+//    }
+
     @Override
-    public GraphNode getGraphNode(Object nodeValue) {
-        if (rootNode.getNodeValue().equals(nodeValue)) {
-            return rootNode;
+    public LinkedList<GraphNode> pathBetween(Object startValue, Object endValue) {
+        //TODO implement a new list to save the currentPath
+        LinkedList<GraphNode> searchList = new LinkedList<>();
+        GraphNode startNode = nodesHashMap.get(startValue);
+        GraphNode endNode = nodesHashMap.get(endValue);
+
+        if(startNode == null || endNode == null) {
+            return null;
         }
 
-        ArrayList<GraphNode> searchList = new ArrayList<>(rootNode.getNodeConnections());
+        searchList.add(startNode);
         while (!searchList.isEmpty()) {
-            GraphNode currentNode = searchList.remove(0);
-            if(currentNode.getNodeValue().equals(nodeValue)) {
-                return currentNode;
+            GraphNode currentNode = searchList.getLast();
+            currentNode.setValid(false);
+            if(currentNode.getNodeValue().equals(endNode.getNodeValue())) {
+                return getOnlyCurrentPath(searchList);
             }
 
-            searchList.addAll(currentNode.getNodeConnections());
+            HashSet validConnections = currentNode.getValidNodeConnection();
+            if(validConnections.isEmpty()) {
+                searchList.removeLast();
+            } else {
+                searchList.addAll(currentNode.getValidNodeConnection());
+            }
         }
-
         return null;
     }
 
     @Override
-    public boolean hasGraphNode(Object nodeValue) {
-        return getGraphNode(nodeValue) != null;
+    public GraphNode getGraphNode(Object nodeValue) {
+        return nodesHashMap.get(nodeValue);
     }
 
-    @Override
-    public void setRootNode(GraphNode rootNode) {
-        this.rootNode = rootNode;
-    }
-
-    @Override
-    public GraphNode getRootNode() {
-        return rootNode;
+    private LinkedList<GraphNode> getOnlyCurrentPath(LinkedList<GraphNode> path) {
+        LinkedList<GraphNode> clone = new LinkedList<>(path);
+        for (GraphNode node : path) {
+            if(!node.isOnTheCurrentPath()) {
+                clone.remove(node);
+            }
+        }
+        return clone;
     }
 }
