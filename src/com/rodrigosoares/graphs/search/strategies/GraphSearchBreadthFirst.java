@@ -20,28 +20,9 @@ public class GraphSearchBreadthFirst extends GraphSearchStrategy {
         this.nodesHashMap = nodesHashMap;
     }
 
-//    @Override
-//    public GraphNode getGraphNode(Object nodeValue) {
-//        if (rootNode.getNodeValue().equals(nodeValue)) {
-//            return rootNode;
-//        }
-//
-//        ArrayList<GraphNode> searchList = new ArrayList<>(rootNode.getNodeConnections());
-//        while (!searchList.isEmpty()) {
-//            GraphNode currentNode = searchList.remove(0);
-//            if(currentNode.getNodeValue().equals(nodeValue)) {
-//                return currentNode;
-//            }
-//
-//            searchList.addAll(currentNode.getNodeConnections());
-//        }
-//
-//        return null;
-//    }
-
     @Override
     public LinkedList<GraphNode> pathBetween(Object startValue, Object endValue) {
-        //TODO implement a new list to save the currentPath
+        LinkedList<GraphNode> currentPath = new LinkedList<>();
         LinkedList<GraphNode> searchList = new LinkedList<>();
         GraphNode startNode = nodesHashMap.get(startValue);
         GraphNode endNode = nodesHashMap.get(endValue);
@@ -51,21 +32,47 @@ public class GraphSearchBreadthFirst extends GraphSearchStrategy {
         }
 
         searchList.add(startNode);
+        //While there are nodes to be search, it still looking for a valid path
         while (!searchList.isEmpty()) {
             GraphNode currentNode = searchList.getLast();
             currentNode.setValid(false);
+            currentPath.add(currentNode);
+
+            //If the algorithm reach the end node
             if(currentNode.getNodeValue().equals(endNode.getNodeValue())) {
-                return getOnlyCurrentPath(searchList);
+                return currentPath;
             }
 
             HashSet validConnections = currentNode.getValidNodeConnection();
+            //If the current node has no more connections to be added to the search list
             if(validConnections.isEmpty()) {
+                removeParentConnections(currentNode, currentPath);
+                currentPath.remove(currentNode);
                 searchList.removeLast();
             } else {
+                //If the current node has connections to be search yet
                 searchList.addAll(currentNode.getValidNodeConnection());
             }
         }
+
+        //If there is no connection between the begin and end nodes
         return null;
+    }
+
+    /**
+     * Removes all parent connections of node. It is useful for clear the current path of leafs that is not in
+     * the path between the begin and end nodes of the search.
+     * @param node The node to be removed from the parent connections
+     * @param currentPath The current path of the search
+     */
+    private void removeParentConnections(GraphNode node, LinkedList<GraphNode> currentPath) {
+        for(GraphNode currentParent : node.getNodeConnections()) {
+            HashSet<GraphNode> parentConnections = currentParent.getNodeConnections();
+            parentConnections.remove(node);
+            if(parentConnections.size() < 2) {
+                currentPath.remove(currentParent);
+            }
+        }
     }
 
     @Override
@@ -73,13 +80,4 @@ public class GraphSearchBreadthFirst extends GraphSearchStrategy {
         return nodesHashMap.get(nodeValue);
     }
 
-    private LinkedList<GraphNode> getOnlyCurrentPath(LinkedList<GraphNode> path) {
-        LinkedList<GraphNode> clone = new LinkedList<>(path);
-        for (GraphNode node : path) {
-            if(!node.isOnTheCurrentPath()) {
-                clone.remove(node);
-            }
-        }
-        return clone;
-    }
 }

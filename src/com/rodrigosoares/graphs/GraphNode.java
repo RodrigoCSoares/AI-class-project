@@ -9,7 +9,6 @@ public class GraphNode {
     private Object nodeValue;
     private HashSet<GraphNode> nodeConnections;
     private boolean isValid = true;
-    private boolean isOnTheCurrentPath = false;
 
     /**
      * Constructor
@@ -96,19 +95,4 @@ public class GraphNode {
         isValid = valid;
     }
 
-    /**
-     * Checks if the current node is on the current path of the search
-     * @return true if it is on the current path or false if it is not
-     */
-    public boolean isOnTheCurrentPath() {
-        return isOnTheCurrentPath;
-    }
-
-    /**
-     * Set if the current node is on the current path of the search
-     * @param onTheCurrentPath true if it is on the current path or false if it is not
-     */
-    public void setOnTheCurrentPath(boolean onTheCurrentPath) {
-        isOnTheCurrentPath = onTheCurrentPath;
-    }
 }

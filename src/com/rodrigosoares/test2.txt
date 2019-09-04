@@ -1,0 +1,7 @@
+zero, um, quatro;
+um, zero, tres, quatro, dois;
+dois, um, tres;
+tres, dois, quatro, um;
+quatro, zero, um, tres;
+zero;
+tres;

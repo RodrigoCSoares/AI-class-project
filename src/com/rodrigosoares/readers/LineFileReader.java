@@ -26,7 +26,7 @@ public class LineFileReader {
 
                 char c = (char) charInt;
                 if(c != lineBreakerPattern) {
-                    if(c != '\n') {
+                    if(c != '\n' && c != '\r') {
                         stringBuilder.append(c);
                     }
                 } else {
