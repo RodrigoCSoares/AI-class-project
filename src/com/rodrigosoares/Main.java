@@ -1,10 +1,10 @@
 package com.rodrigosoares;
 
 import com.rodrigosoares.graphs.GraphNode;
+import com.rodrigosoares.graphs.search.strategies.GraphSearchDepthFirst;
 import com.rodrigosoares.readers.LineFileReader;
 import com.rodrigosoares.graphs.GraphBuilder;
 import com.rodrigosoares.graphs.search.GraphSearcher;
-import com.rodrigosoares.graphs.search.strategies.GraphSearchBreadthFirst;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -29,7 +29,7 @@ public class Main {
 
         //Search for a node
         GraphBuilder graphBuilder = new GraphBuilder(lines, ", ");
-        GraphSearcher graphSearcher = new GraphSearcher (new GraphSearchBreadthFirst(graphBuilder.getGraphNodesHashMap()));
+        GraphSearcher graphSearcher = new GraphSearcher (new GraphSearchDepthFirst(graphBuilder.getGraphNodesHashMap()));
         LinkedList<GraphNode> linkedList  = graphSearcher.pathBetween(lines.get(lines.size() - 2), lines.get(lines.size() - 1));
         System.out.println(linkedList.size());
     }
