@@ -44,10 +44,20 @@ public class GraphNode {
         return nodeConnections;
     }
 
-    public HashSet<GraphNode> getValidNodeConnection() {
+    public HashSet<GraphNode> getValidNodeConnections() {
         HashSet<GraphNode> validNodes = new HashSet<>();
         for(GraphNode node : nodeConnections) {
             if (node.isValid()) {
+                validNodes.add(node);
+            }
+        }
+        return validNodes;
+    }
+
+    public HashSet<GraphNode> getInvalidNodeConnections() {
+        HashSet<GraphNode> validNodes = new HashSet<>();
+        for(GraphNode node : nodeConnections) {
+            if (!node.isValid()) {
                 validNodes.add(node);
             }
         }
@@ -94,5 +104,4 @@ public class GraphNode {
     public void setValid(boolean valid) {
         isValid = valid;
     }
-
 }

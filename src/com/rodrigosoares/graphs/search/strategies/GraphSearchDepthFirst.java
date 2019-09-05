@@ -39,39 +39,22 @@ public class GraphSearchDepthFirst extends GraphSearchStrategy {
 
             //If the algorithm reach the end node
             if(currentNode.getNodeValue().equals(endNode.getNodeValue())) {
-                return currentPath;
+                return super.traversePath(currentPath);
             }
 
-            HashSet validConnections = currentNode.getValidNodeConnection();
+            HashSet validConnections = currentNode.getValidNodeConnections();
             //If the current node has no more connections to be added to the search list
             if(validConnections.isEmpty()) {
-                removeParentConnections(currentNode, currentPath);
                 currentPath.remove(currentNode);
                 searchList.removeLast();
             } else {
                 //If the current node has connections to be search yet
-                searchList.addAll(currentNode.getValidNodeConnection());
+                searchList.addAll(currentNode.getValidNodeConnections());
             }
         }
 
         //If there is no connection between the begin and end nodes
-        return null;
-    }
-
-    /**
-     * Removes all parent connections of node. It is useful for clear the current path of leafs that is not in
-     * the path between the begin and end nodes of the search.
-     * @param node The node to be removed from the parent connections
-     * @param currentPath The current path of the search
-     */
-    private void removeParentConnections(GraphNode node, LinkedList<GraphNode> currentPath) {
-        for(GraphNode currentParent : node.getNodeConnections()) {
-            HashSet<GraphNode> parentConnections = currentParent.getNodeConnections();
-            parentConnections.remove(node);
-            if(parentConnections.size() < 2) {
-                currentPath.remove(currentParent);
-            }
-        }
+        return currentPath;
     }
 
     @Override

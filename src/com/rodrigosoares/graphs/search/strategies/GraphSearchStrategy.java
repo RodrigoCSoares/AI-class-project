@@ -32,4 +32,25 @@ public abstract class GraphSearchStrategy {
      */
     public abstract LinkedList<GraphNode> pathBetween(Object startValue, Object endValue);
 
+    /**
+     * Traverse the given list removing all the nodes that was left during the search and does not belongs
+     * to the path.
+     * @param linkedList The list to be transversed
+     * @return The path without garbage nodes
+     */
+    LinkedList<GraphNode> traversePath(LinkedList<GraphNode> linkedList) {
+        LinkedList<GraphNode> resultList = new LinkedList<>(linkedList);
+        int i = resultList.size() - 1;
+
+        while (i > 0) {
+            GraphNode currentNode = resultList.get(i);
+            if(!currentNode.getInvalidNodeConnections().contains(resultList.get(i-1))) {
+                resultList.remove(i-1);
+            }
+            i--;
+        }
+
+        return resultList;
+    }
+
 }
