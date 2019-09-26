@@ -1,7 +1,7 @@
 package com.rodrigosoares.graphs;
 
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * This class represents a node of the a graph
@@ -81,6 +81,20 @@ public class GraphNode {
             }
         }
         return validNodes;
+    }
+
+    public Map<GraphNode, Integer> getValidNodeConnectionsWeightOrder() {
+        Map<GraphNode, Integer> ordered = nodeConnectionsWeight.entrySet().stream()
+                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e2, e1) -> e1, LinkedHashMap::new));
+        Map<GraphNode, Integer> copy = new HashMap<>(ordered);
+
+        for (GraphNode node : copy.keySet()) {
+            if (!node.isValid()) {
+                ordered.remove(node);
+            }
+        }
+        return ordered;
     }
 
     /**

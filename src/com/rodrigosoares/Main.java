@@ -32,9 +32,9 @@ public class Main {
 
         //Search for a node
         GraphBuilder graphBuilder = new GraphBuilder(lines, ", ", GraphSearchUniformCost.class);
-//        GraphSearcher graphSearcher = new GraphSearcher (new GraphSearchBreadthFirst(graphBuilder.getGraphNodesHashMap()));
-//        LinkedList<GraphNode> linkedList  = graphSearcher.pathBetween(lines.get(lines.size() - 2), lines.get(lines.size() - 1));
-//        System.out.println(pathToString(linkedList));
+        GraphSearcher graphSearcher = new GraphSearcher(new GraphSearchUniformCost(graphBuilder.getGraphNodesHashMap()));
+        LinkedList<GraphNode> linkedList = graphSearcher.pathBetween(lines.get(lines.size() - 2), lines.get(lines.size() - 1));
+        System.out.println(pathToString(linkedList));
     }
 
     /**

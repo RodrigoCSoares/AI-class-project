@@ -63,8 +63,9 @@ public class GraphBuilder {
         for (String line : linesOfConnections) {
             String[] nodeValues = line.split(splitPattern);
             GraphNode node = nodesHashMap.get(nodeValues[0]);
+            int lastNodePosition = searchStrategy.equals(GraphSearchUniformCost.class) ? nodeValues.length - 1 : nodeValues.length;
 
-            for (int i = 1; i < nodeValues.length; i++) {
+            for (int i = 1; i < lastNodePosition; i++) {
                 GraphNode connectedNode = nodesHashMap.get(nodeValues[i]);
                 connectedNode.addNodeConnection(node);
                 node.addNodeConnection(connectedNode);

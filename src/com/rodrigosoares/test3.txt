@@ -1,6 +1,12 @@
-Campinas, Sao Paulo, 3;
-Sao Paulo, Paulinia, 2;
+Campinas, Sao Paulo, 0;
+Campinas, Curitiba, 2;
+Campinas, Salvador, 1;
+Curitiba, Salvador, 1;
+Curitiba, Miami, 2;
+Salvador, Sao Paulo, 2;
+Salvador, Brasilia, 1;
+Sao Paulo, Paulinia, 1;
+Miami, Brasilia, 1;
 Paulinia, Brasilia, 1;
-Curitiba, Salvador, 0;
+Campinas;
 Paulinia;
-Salvador;
