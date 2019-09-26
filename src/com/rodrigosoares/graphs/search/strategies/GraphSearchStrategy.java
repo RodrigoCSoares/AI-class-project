@@ -12,6 +12,7 @@ public abstract class GraphSearchStrategy {
 
     /**
      * Constructor
+     *
      * @param nodesHashMap Graph nodes hash map
      */
     GraphSearchStrategy(HashMap<Object, GraphNode> nodesHashMap) {
@@ -19,6 +20,7 @@ public abstract class GraphSearchStrategy {
 
     /**
      * Returns a graph node based on its value
+     *
      * @param nodeValue Node value to be searched
      * @return The graph node if it exists or null if it does not exist
      */
@@ -26,8 +28,9 @@ public abstract class GraphSearchStrategy {
 
     /**
      * Search for a path between two nodes
+     *
      * @param startValue The value of the node to be used as the start of the search
-     * @param endValue The value of the end node to be used as the end of the search
+     * @param endValue   The value of the end node to be used as the end of the search
      * @return The path between those two nodes
      */
     public abstract LinkedList<GraphNode> pathBetween(Object startValue, Object endValue);
@@ -35,6 +38,7 @@ public abstract class GraphSearchStrategy {
     /**
      * Traverse the given list removing all the nodes that was left during the search and does not belongs
      * to the path.
+     *
      * @param linkedList The list to be transversed
      * @return The path without garbage nodes
      */
@@ -44,8 +48,8 @@ public abstract class GraphSearchStrategy {
 
         while (i > 0) {
             GraphNode currentNode = resultList.get(i);
-            if(!currentNode.getInvalidNodeConnections().contains(resultList.get(i-1))) {
-                resultList.remove(i-1);
+            if (!currentNode.getInvalidNodeConnections().contains(resultList.get(i - 1))) {
+                resultList.remove(i - 1);
             }
             i--;
         }

@@ -1,5 +1,6 @@
 package com.rodrigosoares.graphs;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 /**
@@ -8,20 +9,28 @@ import java.util.HashSet;
 public class GraphNode {
     private Object nodeValue;
     private HashSet<GraphNode> nodeConnections;
+    private HashMap<GraphNode, Integer> nodeConnectionsWeight;
     private boolean isValid = true;
 
     /**
      * Constructor
-     * @param nodeValue Node's value
-     * @param nodeConnections Connections of the node
+     *
+     * @param nodeValue             Node's value
+     * @param nodeConnectionsWeight Connections of the node
      */
-    public GraphNode(Object nodeValue, HashSet<GraphNode> nodeConnections) {
+    public GraphNode(Object nodeValue, HashMap<GraphNode, Integer> nodeConnectionsWeight) {
         this.nodeValue = nodeValue;
-        this.nodeConnections = nodeConnections != null ? nodeConnections : new HashSet<>();
+        this.nodeConnectionsWeight = nodeConnectionsWeight != null ? nodeConnectionsWeight : new HashMap<>();
+        if (nodeConnectionsWeight != null) {
+            this.nodeConnections = new HashSet<>(nodeConnectionsWeight.keySet());
+        } else {
+            this.nodeConnections = new HashSet<>();
+        }
     }
 
     /**
      * Returns the node's value
+     *
      * @return Node's value
      */
     public Object getNodeValue() {
@@ -30,6 +39,7 @@ public class GraphNode {
 
     /**
      * Set node's value
+     *
      * @param nodeValue Node's value
      */
     public void setNodeValue(Object nodeValue) {
@@ -38,15 +48,24 @@ public class GraphNode {
 
     /**
      * Get node's connection
+     *
      * @return Node's connection
      */
     public HashSet<GraphNode> getNodeConnections() {
         return nodeConnections;
     }
 
+    public HashMap<GraphNode, Integer> getNodeConnectionsWeight() {
+        return nodeConnectionsWeight;
+    }
+
+    public void setNodeConnectionsWeight(HashMap<GraphNode, Integer> nodeConnectionsWeight) {
+        this.nodeConnectionsWeight = nodeConnectionsWeight;
+    }
+
     public HashSet<GraphNode> getValidNodeConnections() {
         HashSet<GraphNode> validNodes = new HashSet<>();
-        for(GraphNode node : nodeConnections) {
+        for (GraphNode node : nodeConnections) {
             if (node.isValid()) {
                 validNodes.add(node);
             }
@@ -56,7 +75,7 @@ public class GraphNode {
 
     public HashSet<GraphNode> getInvalidNodeConnections() {
         HashSet<GraphNode> validNodes = new HashSet<>();
-        for(GraphNode node : nodeConnections) {
+        for (GraphNode node : nodeConnections) {
             if (!node.isValid()) {
                 validNodes.add(node);
             }
@@ -66,6 +85,7 @@ public class GraphNode {
 
     /**
      * Set node's connection
+     *
      * @param nodeConnections Node's connection
      */
     public void setNodeConnections(HashSet<GraphNode> nodeConnections) {
@@ -74,10 +94,21 @@ public class GraphNode {
 
     /**
      * Adds a single node connection
+     *
      * @param node Node's connection
      */
     public void addNodeConnection(GraphNode node) {
         this.nodeConnections.add(node);
+    }
+
+    /**
+     * Add a weight to a node connection
+     *
+     * @param node   Node's connection
+     * @param weight Weight of the connection
+     */
+    public void addNodeConnectionWeight(GraphNode node, Integer weight) {
+        this.nodeConnectionsWeight.put(node, weight);
     }
 
 
@@ -91,6 +122,7 @@ public class GraphNode {
 
     /**
      * Checks if a node of the graph was already visited or not
+     *
      * @return true if the node was visited or false if it was not visited
      */
     public boolean isValid() {
@@ -99,6 +131,7 @@ public class GraphNode {
 
     /**
      * Set if a node of the graph was already visited or not
+     *
      * @param valid true if the node was visited or false if it was not visited
      */
     public void setValid(boolean valid) {

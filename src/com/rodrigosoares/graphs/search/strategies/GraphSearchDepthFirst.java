@@ -12,6 +12,7 @@ public class GraphSearchDepthFirst extends GraphSearchStrategy {
 
     /**
      * Constructor
+     *
      * @param nodesHashMap Graph nodes hash map
      */
     public GraphSearchDepthFirst(HashMap<Object, GraphNode> nodesHashMap) {
@@ -26,7 +27,7 @@ public class GraphSearchDepthFirst extends GraphSearchStrategy {
         GraphNode startNode = nodesHashMap.get(startValue);
         GraphNode endNode = nodesHashMap.get(endValue);
 
-        if(startNode == null || endNode == null) {
+        if (startNode == null || endNode == null) {
             return null;
         }
 
@@ -38,13 +39,13 @@ public class GraphSearchDepthFirst extends GraphSearchStrategy {
             currentPath.add(currentNode);
 
             //If the algorithm reach the end node
-            if(currentNode.getNodeValue().equals(endNode.getNodeValue())) {
+            if (currentNode.getNodeValue().equals(endNode.getNodeValue())) {
                 return super.traversePath(currentPath);
             }
 
             HashSet validConnections = currentNode.getValidNodeConnections();
             //If the current node has no more connections to be added to the search list
-            if(validConnections.isEmpty()) {
+            if (validConnections.isEmpty()) {
                 currentPath.remove(currentNode);
                 searchList.removeLast();
             } else {

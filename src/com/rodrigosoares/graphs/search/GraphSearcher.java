@@ -13,6 +13,7 @@ public class GraphSearcher {
 
     /**
      * Constructor
+     *
      * @param searchStrategy Search strategy to be used
      */
     public GraphSearcher(GraphSearchStrategy searchStrategy) {
@@ -21,6 +22,7 @@ public class GraphSearcher {
 
     /**
      * Search for a graph node with the given node value
+     *
      * @param nodeValue Node value to be searched
      * @return A graph node with the given node value or null if there is no graph node with that value
      */
@@ -30,8 +32,9 @@ public class GraphSearcher {
 
     /**
      * Search for a path between two nodes
+     *
      * @param startValue The value of the node to be used as the start of the search
-     * @param endValue The value of the end node to be used as the end of the search
+     * @param endValue   The value of the end node to be used as the end of the search
      * @return The path between those two nodes
      */
     public LinkedList<GraphNode> pathBetween(Object startValue, Object endValue) {

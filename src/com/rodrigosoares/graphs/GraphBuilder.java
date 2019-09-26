@@ -1,5 +1,8 @@
 package com.rodrigosoares.graphs;
 
+import com.rodrigosoares.graphs.search.strategies.GraphSearchStrategy;
+import com.rodrigosoares.graphs.search.strategies.GraphSearchUniformCost;
+
 import java.util.*;
 
 /**
@@ -13,30 +16,32 @@ public class GraphBuilder {
 
     /**
      * Constructor
+     *
      * @param linesOfConnections An ArrayList of strings with all the lines that represents the graph
-     *                          connections
-     * @param splitPattern The split pattern for the items in which line
+     *                           connections
+     * @param splitPattern       The split pattern for the items in which line
      */
-    public GraphBuilder(ArrayList<String> linesOfConnections, String splitPattern) {
+    public GraphBuilder(ArrayList<String> linesOfConnections, String splitPattern, Class searchStrategy) {
         this.nodesHashMap = initializeAllNodes(linesOfConnections, splitPattern);
-        setupNodesConnection(linesOfConnections, this.nodesHashMap, splitPattern);
+        setupNodesConnection(linesOfConnections, this.nodesHashMap, splitPattern, searchStrategy);
     }
 
     /**
      * Initializes all nodes of the graph
      * , reading all lines of connections and adding all nodes into a HashMap
+     *
      * @param linesOfConnections An ArrayList of strings with all the lines that represents the graph
-     *                          connections
-     * @param splitPattern The split pattern for the items in which line
+     *                           connections
+     * @param splitPattern       The split pattern for the items in which line
      * @return The HashMap linking the nodes with the respective node's value
      */
     private HashMap<Object, GraphNode> initializeAllNodes(ArrayList<String> linesOfConnections, String splitPattern) {
         HashMap<Object, GraphNode> readNodes = new HashMap<>();
 
-        for(String line : linesOfConnections) {
+        for (String line : linesOfConnections) {
             String[] nodeValues = line.split(splitPattern);
 
-            for(String node : nodeValues) {
+            for (String node : nodeValues) {
                 if (!readNodes.containsKey(node)) {
                     readNodes.put(node, new GraphNode(node, null));
                 }
@@ -48,20 +53,26 @@ public class GraphBuilder {
 
     /**
      * Setup node objects connections between the each other in the HashMap
+     *
      * @param linesOfConnections An ArrayList of strings with all the lines that represents the graph
-     *                          connections
-     * @param nodesHashMap The HashMap linking the nodes with the respective node's value
-     * @param splitPattern The split pattern for the items in which line
+     *                           connections
+     * @param nodesHashMap       The HashMap linking the nodes with the respective node's value
+     * @param splitPattern       The split pattern for the items in which line
      */
-    private void setupNodesConnection(ArrayList<String> linesOfConnections, HashMap<Object, GraphNode> nodesHashMap, String splitPattern) {
-        for(String line : linesOfConnections) {
+    private void setupNodesConnection(ArrayList<String> linesOfConnections, HashMap<Object, GraphNode> nodesHashMap, String splitPattern, Class searchStrategy) {
+        for (String line : linesOfConnections) {
             String[] nodeValues = line.split(splitPattern);
             GraphNode node = nodesHashMap.get(nodeValues[0]);
 
-            for(int i = 1; i < nodeValues.length; i++) {
+            for (int i = 1; i < nodeValues.length; i++) {
                 GraphNode connectedNode = nodesHashMap.get(nodeValues[i]);
                 connectedNode.addNodeConnection(node);
                 node.addNodeConnection(connectedNode);
+                if (searchStrategy.equals(GraphSearchUniformCost.class)) {
+                    int weight = Integer.parseInt(nodeValues[nodeValues.length - 1]);
+                    node.addNodeConnectionWeight(connectedNode, weight);
+                    connectedNode.addNodeConnectionWeight(node, weight);
+                }
             }
         }
     }
@@ -69,6 +80,7 @@ public class GraphBuilder {
     /**
      * Returns the graph nodes hash map
      * nodes
+     *
      * @return The graph nodes hash map
      * nodes
      */
